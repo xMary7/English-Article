@@ -1,0 +1,25 @@
+\documentclass{sig-alternate-05-2015}
+
+
+\begin{document}
+
+\title{Automatic function contracts mining}
+\numberofauthors{1} 
+
+\author{
+\alignauthor
+Azat Abdullin\\
+       \affaddr{Peter the Great St. Petersburg Polytechnic University}\\
+       \email{abdullin@kspt.icc.spbstu.ru}
+}
+
+\maketitle
+
+
+\section{Introduction}
+Program static analysis is now becoming one of the cornerstones in software development. One of the hardest questions in program analysis is interprocedural analysis --- analysis of how function calls manipulate the program state and interact with each other. There are a lot of possible ways one might deal with this problem: function inlining, hand-written contracts, advanced specification inference techniques. But none of this approaches solves the problem completely.
+
+A number of approaches to function summarization are based on software mining, a new technique which attempts to extract useful information from already existing software. Most of these approaches are dynamic in natural, so they require some artifacts of program execution. But there are some approaches that are static and they can be applied in static program analysis.
+
+This paper presents an approach to function contract mining in bounded model checking. Approach is based on SMT solvers and underlying formula-based program representation. Capabilities of modern SMT solvers allow our approach to mine succinct and non-contradictionary function contracts from the source code. The results of preliminary evaluation showed that our approach is able to extract a lot of correct contracts and these contracts have some positive influence on BMC.
+\end{document}

@@ -1,0 +1,63 @@
+\renewcommand{\litleft}{\bfshape}
+\renewcommand{\litright}{}
+
+\begin{figure*}[p]
+
+\caption{Predicate state format}
+\label{fig:predicate-state}
+
+\begin{grammar}
+
+<PredicateState> ::= "PredicateStateChain" head:<PredicateState> tail:<PredicateState>
+\alt "PredicateStateChoice" choices:<ListOfPredicateStates>
+\alt "BasicPredicateState" data:<ListOfPredicates>
+
+<Predicate> ::= "AllocaPredicate" lhv:<Term> numElems:<Term> origNumElems:<Term>
+\alt "DefaultSwitchCasePredicate" cond:<Term> cases:<ListOfTerms>
+\alt "EqualityPredicate" lhv:<Term> rhv:<Term>
+\alt "GlobalsPredicate" globals:<ListOfTerms>
+\alt "InequalityPredicate" lhv:<Term> rhv:<Term>
+\alt "MallocPredicate" lhv:<Term> numElems:<Term> origNumElems:<Term>
+\alt "SeqDataPredicate" base:<Term> data:<ListOfTerms>
+\alt "SeqDataZeroPredicate" base:<Term> size:\textit{UInt32}
+\alt "StorePredicate" ptr:<Term> value:<Term>
+\alt "WriteBoundPredicate" ptr:<Term> boundValue:<Term>
+\alt "WritePropertyPredicate" propName:<Term> ptr:<Term> propValue:<Term>
+
+<Term> ::= "ArgumentTerm" idx:\textit{UInt32} kind:<ArgumentKind>
+\alt "ArgumentCountTerm"
+\alt "AxiomTerm" term:<Term> axiom:<Term>
+\alt "BinaryTerm" op:<BinaryOp> lhv:<Term> rhv:<Term>
+\alt "BoundTerm" term:<Term>
+\alt "CastTerm" term:<Term> signExtend:\textit{Bool}
+\alt "CmpTerm" op:<CmpOp> lhv:<Term> rhv:<Term>
+\alt "ConstTerm"
+\alt "FreeVarTerm"
+\alt "GepTerm" base:<Term> shifts:<ListOfTerms> triviallyInbounds:\textit{Bool}
+\alt "LoadTerm" ptr:<Term>
+\alt "ReadPropertyTerm" propName:<Term> ptr:<Term>
+\alt "ReturnPtrTerm" funcName:\textit{String}
+\alt "ReturnValueTerm" funcName:\textit{String}
+\alt "SignTerm" value:<Term>
+\alt "TernaryTerm" cond:<Term> tru:<Term> fls:<Term>
+\alt "UnaryTerm" op:<UnaryOp> value:<Term>
+\alt "ValueTerm" global:\textit{Bool}
+\alt "VarArgumentTerm" index:\textit{UInt32}
+\alt ...
+
+<ListOfPredicateStates> ::= <PredicateState> <ListOfPredicateStates> | <empty>
+
+<ListOfPredicates> ::= <Predicate> <ListOfPredicates> | <empty>
+
+<ListOfTerms> ::= <Term> <ListOfTerms> | <empty>
+
+<ArgumentKind> ::= "ANY" | "STRING"
+
+<CmpOp> ::= "EQ" | "NEQ" | "GT" | ...
+
+<BinaryOp> ::=  "ADD" | "SUB" | "MUL" | ...
+
+<UnaryOp> ::= "NEG" | "NOT" | "BINARY_NOT"
+
+\end{grammar}
+\end{figure*}

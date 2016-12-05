@@ -1,0 +1,62 @@
+\documentclass{sig-alternate-05-2015}
+
+\graphicspath{{fig/}}
+
+\usepackage{multicol}
+
+\usepackage{listings}
+\usepackage{syntax}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+
+\usepackage{mdwlist}
+\usepackage{tablefootnote}
+
+\usepackage{todonotes}
+
+\lstdefinestyle{basic}{
+  extendedchars     = {true},
+  inputencoding     = {utf8},
+  basicstyle        = {\ttfamily \scriptsize},
+  keywordstyle      = {\rmfamily \bfseries},
+  commentstyle      = {\rmfamily \itshape},
+  tabsize           = {2},
+  flexiblecolumns   = {false},
+  frame             = {single},
+  showstringspaces  = {false},
+  breaklines        = {true},
+  breakatwhitespace = {true}
+}
+
+\lstdefinelanguage{llvm-asm}
+{
+  morekeywords = {
+    define, function, ret, align,
+    load, store, malloc, alloca, free, getelementptr,
+    add, sub, insertvalue, extractvalue, icmp, call
+  },
+  sensitive    = false,
+  morecomment  = [l]{;}
+}
+
+\lstdefinelanguage{PS}
+{
+  morekeywords = {
+    true, false, <nullptr>
+  },
+  sensitive    = true,
+  morecomment  = [l]{---}
+}
+
+\lstdefinestyle{llvm-asm}{
+  style    = {basic},
+  language = {llvm-asm}
+}
+
+\lstdefinestyle{PS}{
+  style    = {basic},
+  frame    = {none},
+  language = {PS}
+}
+
+\clubpenalty=50000

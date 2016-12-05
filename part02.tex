@@ -1,0 +1,20 @@
+\section{Experiment}\label{sec:definition}
+
+The developed application obtains input data: the number of accounts for the analysis and the list of keywords. The Twitter programming interface is called to select data. So the request redirects to the Twitter API. Further the subscribers of the fixed user are boot. The user of Barack Obama was used because of the big amount of his subscribers. 
+
+Accidental subscribers are selected, all their tweets are booted by 200 pieces per call since the Twitter API has a limit on a single request of the messages boot. Then all the tweets are being analysed on existence of the entered keywords with the Word Count algorithm. As a result the pie chart with analysis results is displayed.
+
+For creation of a web service the following units were designed and implemented:
+
+\begin {enumerate}
+\item \textbf{The REST-client for connection to a backend}
+
+The REST client is filled automatically with Spring framework, using settings for the appendix where the backend address is specified. The client sends the HTTP GET request on the backend service URI with the parameters entered by the user - number of accounts for the analysis and keywords. Also the client receives the response in the JSON format, transferring it to a collection with words and their quantity among the analyzed accounts.
+\item \textbf{Web-service controller (Front-controller)}
+
+This is the main controller of a Spring MVC framework. It is loaded with the start of the application and automatically sets the URI whereby the REST client will be connected for communication with the backend. When the web-service is started the client locates at the address "/" - in this case Front-controller won't receive data from a backend therefore the empty request is used. After entering of input parameters by the user and sending the form with these data the client is redirected to the address "/load-request". Then the controller receives a request for the analysis, transfers it to the backend, takes the received model and fills the view with data received, builds the chart by results.
+\item \textbf{Working service controller (WorkerController)}
+
+This controller receives the number of accounts which are had to be analyzed, and the keywords coming from the Front-controller after the REST-client query with parameters. The controller loads tweets by 200 pieces per call, reads words and gives result to the web, responds in the json format.
+\end {enumerate}
+
